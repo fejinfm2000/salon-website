@@ -1,0 +1,52 @@
+.features-page {
+    padding: var(--spacing-xl) 0;
+
+    .text-center {
+        text-align: center;
+        margin-bottom: var(--spacing-xl);
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+        color: var(--text-secondary);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--spacing-lg);
+    }
+
+    .feature-card {
+        background-color: var(--surface-color);
+        padding: var(--spacing-lg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        transition: all var(--transition-speed);
+
+        &:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-color);
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        h3 {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        p {
+            color: var(--text-secondary);
+        }
+    }
+}

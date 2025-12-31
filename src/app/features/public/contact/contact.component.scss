@@ -1,0 +1,255 @@
+.contact-page {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--background-color);
+
+    .contact-header {
+        margin-bottom: var(--spacing-xl);
+
+        .sub-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    }
+
+    /* Floating Details Cards */
+    .details-cards-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-lg);
+        margin-bottom: var(--spacing-xl);
+
+        @media (max-width: 992px) {
+            grid-template-columns: 1fr;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    .detail-card {
+        background-color: var(--surface-color);
+        padding: var(--spacing-lg);
+        border-radius: 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
+
+        &:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+
+            .card-icon {
+                background-color: var(--primary-color);
+                color: white;
+                transform: rotate(10deg);
+            }
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--background-color);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            color: var(--primary-color);
+        }
+
+        h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin: 0;
+            word-break: break-all;
+        }
+
+        .card-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(98, 0, 234, 0.05) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        &:hover .card-glow {
+            opacity: 1;
+        }
+    }
+
+    /* Form Section */
+    .form-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .form-card {
+        background-color: var(--surface-color);
+        padding: var(--spacing-xl);
+        border-radius: 24px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.05);
+
+        @media (max-width: 576px) {
+            padding: var(--spacing-lg);
+        }
+
+        .form-intro {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+
+            h2 {
+                font-size: 2rem;
+                margin-bottom: 8px;
+            }
+
+            p {
+                color: var(--text-secondary);
+            }
+        }
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-md);
+
+        @media (max-width: 576px) {
+            grid-template-columns: 1fr;
+        }
+
+        .full-width {
+            grid-column: span 2;
+
+            @media (max-width: 576px) {
+                grid-column: span 1;
+            }
+        }
+    }
+
+    .form-group {
+        margin-bottom: var(--spacing-md);
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+
+        input,
+        textarea,
+        .styled-select {
+            width: 100%;
+            padding: 14px 18px;
+            background-color: var(--background-color);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+
+            &:focus {
+                outline: none;
+                border-color: var(--primary-color);
+                box-shadow: 0 0 0 4px rgba(98, 0, 234, 0.1);
+                background-color: var(--surface-color);
+            }
+        }
+
+        .styled-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 18px;
+            cursor: pointer;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+    }
+
+    .form-actions {
+        margin-top: var(--spacing-lg);
+        text-align: center;
+
+        .action-btn {
+            position: relative;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(98, 0, 234, 0.2);
+
+            span {
+                position: relative;
+                z-index: 1;
+            }
+
+            .btn-hover {
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                transition: left 0.5s;
+            }
+
+            &:hover {
+                transform: scale(1.02);
+                box-shadow: 0 15px 30px rgba(98, 0, 234, 0.3);
+
+                .btn-hover {
+                    left: 100%;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "title": "Simple, Transparent Pricing",
+    "metaDescription": "Pricing plans for SalonPro.",
+    "plans": [
+        {
+            "name": "Solo Stylist",
+            "price": "19",
+            "period": "mo",
+            "features": [
+                "1 User Profile",
+                "Unlimited Appointments",
+                "Online Booking",
+                "Email Support"
+            ],
+            "ctaText": "Try for Free",
+            "highlight": false
+        },
+        {
+            "name": "Growing Shop",
+            "price": "49",
+            "period": "mo",
+            "features": [
+                "Up to 5 Staff",
+                "SMS Reminders",
+                "Inventory Tracking",
+                "Marketing Tools",
+                "Priority Support"
+            ],
+            "ctaText": "Try for Free",
+            "highlight": true
+        },
+        {
+            "name": "Premium / Multi-Loc",
+            "price": "149",
+            "period": "mo",
+            "features": [
+                "Unlimited Staff",
+                "Advanced Analytics",
+                "API Access",
+                "Dedicated Success Manager",
+                "Custom Branding"
+            ],
+            "ctaText": "Contact Sales",
+            "highlight": false
+        }
+    ]
+}

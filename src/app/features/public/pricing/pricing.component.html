@@ -1,0 +1,33 @@
+<div class="pricing-page" *ngIf="data$ | async as data">
+    <div class="container hero text-center">
+        <h1>{{ data.title }}</h1>
+        <p class="subtitle">Flexible plans for salons of all sizes. No hidden fees.</p>
+    </div>
+
+    <div class="container plans-grid">
+        <div class="plan-card" *ngFor="let plan of data.plans" [class.highlight]="plan.highlight">
+            <div class="popular-badge" *ngIf="plan.highlight">Most Popular</div>
+
+            <div class="plan-header">
+                <h3>{{ plan.name }}</h3>
+                <div class="price">
+                    <span class="currency">$</span>
+                    <span class="amount">{{ plan.price }}</span>
+                    <span class="period">/{{ plan.period }}</span>
+                </div>
+            </div>
+
+            <div class="plan-body">
+                <ul>
+                    <li *ngFor="let feat of plan.features">
+                        <span class="check-icon">✓</span>
+                        <span class="feature-text">{{ feat }}</span>
+                    </li>
+                </ul>
+                <button class="btn" [class.primary]="plan.highlight" [class.secondary]="!plan.highlight">
+                    {{ plan.ctaText }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

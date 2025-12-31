@@ -1,0 +1,68 @@
+<div class="contact-page" *ngIf="data$ | async as data">
+    <div class="container fade-in-up">
+        <div class="contact-header text-center">
+            <span class="sub-title">Connect with Us</span>
+            <h1>Get in Touch</h1>
+            <p>We're here to support your salon's growth and success.</p>
+        </div>
+
+        <!-- Floating Detail Cards Row -->
+        <div class="details-cards-row">
+            <div class="detail-card" *ngFor="let item of data.info; let i = index"
+                [style.animation-delay]="i * 0.1 + 's'">
+                <div class="card-icon">
+                    <span *ngIf="item.label === 'Email'">✉</span>
+                    <span *ngIf="item.label === 'Phone'">📞</span>
+                    <span *ngIf="item.label === 'Address'">📍</span>
+                </div>
+                <h3>{{ item.label }}</h3>
+                <p>{{ item.value }}</p>
+                <div class="card-glow"></div>
+            </div>
+        </div>
+
+        <!-- Centered Contact Form Section -->
+        <div class="form-wrapper">
+            <div class="form-card">
+                <div class="form-intro">
+                    <h2>Send a Message</h2>
+                    <p>Have a specific question? Fill out the form below and we'll get back to you promptly.</p>
+                </div>
+
+                <form class="contact-form" (submit)="onSubmit($event)">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">First & Last Name</label>
+                            <input type="text" id="name" required placeholder="e.g. Jane Smith">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Business Email</label>
+                            <input type="email" id="email" required placeholder="jane@salon.com">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="subject">Inquiry Type</label>
+                            <select id="subject" class="styled-select">
+                                <option>General Inquiry</option>
+                                <option>Software Demo</option>
+                                <option>Support Request</option>
+                                <option>Billing & Account</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" rows="4" required
+                                placeholder="How can we help your business today?"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn action-btn">
+                            <span>Send Message</span>
+                            <div class="btn-hover"></div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

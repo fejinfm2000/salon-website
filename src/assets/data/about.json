@@ -1,0 +1,29 @@
+{
+    "title": "Empowering Beauty Professionals",
+    "metaDescription": "About SalonPro mission.",
+    "story": {
+        "title": "Our Story",
+        "content": "SalonPro was born out of a frustration with clunky, outdated software. We believe that managing your passion shouldn't feel like a chore. We started in a small garage with a big dream: to simplify the business of beauty."
+    },
+    "mission": {
+        "title": "Our Mission",
+        "content": "Our mission is to empower beauty professionals with technology that is as elegant as the styles they create. Whether you are a solo barber or a luxury spa owner, we build tools that help you thrive."
+    },
+    "team": [
+        {
+            "name": "Sarah Jenkins",
+            "role": "Founder & CEO",
+            "initials": "SJ"
+        },
+        {
+            "name": "David Chen",
+            "role": "Head of Product",
+            "initials": "DC"
+        },
+        {
+            "name": "Elena Rodriguez",
+            "role": "Creative Director",
+            "initials": "ER"
+        }
+    ]
+}

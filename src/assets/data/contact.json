@@ -1,0 +1,18 @@
+{
+    "title": "Contact Us",
+    "subtitle": "We'd love to hear from you.",
+    "info": [
+        {
+            "label": "Email",
+            "value": "support@salonpro.com"
+        },
+        {
+            "label": "Phone",
+            "value": "+1 (555) 123-4567"
+        },
+        {
+            "label": "Address",
+            "value": "123 Innovation Dr, Tech City, TC 90210"
+        }
+    ]
+}

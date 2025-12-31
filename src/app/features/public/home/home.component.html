@@ -1,0 +1,69 @@
+<div class="home-page" *ngIf="data$ | async as data">
+    <!-- Hero Section -->
+    <section class="hero" id="home" *ngIf="data?.hero">
+        <div class="container hero-content">
+            <div class="hero-text fade-in-up">
+                <h1>{{ data.hero.headline }}</h1>
+                <p class="subtitle">{{ data.hero.subheadline }}</p>
+                <div class="cta-group">
+                    <a routerLink="/" fragment="pricing" class="btn primary">{{ data.hero.ctaText }}</a>
+                    <a routerLink="/" fragment="how-it-works" class="btn secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image-placeholder fade-in-up" *ngIf="data.hero.heroImage">
+                <img [src]="data.hero.heroImage" alt="Salon Dashboard"
+                    style="width: 100%; border-radius: 20px; box-shadow: var(--shadow-md);">
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section-wrapper">
+        <app-how-it-works></app-how-it-works>
+    </section>
+
+    <!-- Features Highlight -->
+    <section class="features-preview section-wrapper" *ngFor="let section of data.featuresObj">
+        <div class="container">
+            <h2>{{ section.title }}</h2>
+            <div class="grid">
+                <div class="card" *ngFor="let item of section.items">
+                    <div class="icon">{{ item.icon }}</div>
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.description }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Full Section -->
+    <section id="features" class="section-wrapper bg-alt">
+        <app-features></app-features>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section-wrapper">
+        <app-pricing></app-pricing>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-wrapper bg-alt">
+        <app-about></app-about>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-wrapper">
+        <app-contact></app-contact>
+    </section>
+
+
+    <!-- CTA Section Footer -->
+    <section class="cta-section">
+        <div class="container fade-in-up">
+            <h2>Ready to streamline your salon?</h2>
+            <p>Join hundreds of premium salons already using SalonPro to automate their operations and skyrocket their
+                growth.</p>
+            <a routerLink="/pricing" class="btn primary">Get Started Now</a>
+        </div>
+    </section>
+</div>

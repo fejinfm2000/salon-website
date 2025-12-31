@@ -1,0 +1,38 @@
+<header class="header">
+  <div class="container header-content">
+    <a routerLink="/" class="logo">
+      <span class="logo-text">Salon<span class="highlight">Pro</span></span>
+    </a>
+
+    <button class="mobile-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <nav class="nav" [class.open]="isMenuOpen">
+      <ul>
+        <li><a routerLink="/" fragment="home" [class.active]="activeSection() === 'home'"
+            (click)="isMenuOpen = false">Home</a></li>
+        <li><a routerLink="/" fragment="how-it-works" [class.active]="activeSection() === 'how-it-works'"
+            (click)="isMenuOpen = false">How It Works</a></li>
+        <li><a routerLink="/" fragment="features" [class.active]="activeSection() === 'features'"
+            (click)="isMenuOpen = false">Features</a></li>
+        <li><a routerLink="/" fragment="pricing" [class.active]="activeSection() === 'pricing'"
+            (click)="isMenuOpen = false">Pricing</a></li>
+        <li><a routerLink="/" fragment="about" [class.active]="activeSection() === 'about'"
+            (click)="isMenuOpen = false">About</a></li>
+        <li><a routerLink="/" fragment="contact" [class.active]="activeSection() === 'contact'"
+            (click)="isMenuOpen = false">Contact</a></li>
+      </ul>
+
+      <div class="actions">
+        <button class="theme-toggle" (click)="themeService.toggle()" aria-label="Toggle Theme">
+          {{ themeService.theme() === 'light' ? '🌙' : '☀️' }}
+        </button>
+        <!-- Link to Admin for now, simulated SaaS App -->
+        <a href="javascript:void(0)" class="btn primary" (click)="$event.preventDefault()">Client Login</a>
+      </div>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,32 @@
+<div class="about-page" *ngIf="data$ | async as data">
+    <div class="container hero text-center">
+        <h1>{{ data.title }}</h1>
+        <p class="lead-text">Revolutionizing the salon industry, one appointment at a time.</p>
+    </div>
+
+    <div class="container about-grid">
+        <div class="about-card story" *ngIf="data.story">
+            <h2>{{ data.story.title }}</h2>
+            <p>{{ data.story.content }}</p>
+        </div>
+        <div class="about-card mission" *ngIf="data.mission">
+            <h2>{{ data.mission.title }}</h2>
+            <p>{{ data.mission.content }}</p>
+        </div>
+    </div>
+
+    <div class="container team" *ngIf="data.team">
+        <h2 class="section-title">Meet the Team</h2>
+        <div class="team-grid">
+            <div class="member-card" *ngFor="let member of data.team">
+                <div class="avatar">
+                    <span>{{ member.initials }}</span>
+                </div>
+                <div class="info">
+                    <h3>{{ member.name }}</h3>
+                    <p class="role">{{ member.role }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+{
+    "title": "Get Started in Minutes",
+    "subtitle": "We made switching to SalonPro effortless. Here is how it works.",
+    "steps": [
+        {
+            "title": "Create Account",
+            "description": "Sign up with your email. No credit card required for the 14-day trial.",
+            "icon": "📝"
+        },
+        {
+            "title": "Setup Menu",
+            "description": "Add your services, prices, and staff members to the dashboard.",
+            "icon": "✨"
+        },
+        {
+            "title": "Import Clients",
+            "description": "Upload your existing client list via CSV or sync with your phone contacts.",
+            "icon": "👥"
+        },
+        {
+            "title": "Go Live!",
+            "description": "Share your unique booking link on Instagram and start accepting appointments.",
+            "icon": "🚀"
+        }
+    ]
+}

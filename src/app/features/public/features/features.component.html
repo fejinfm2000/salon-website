@@ -1,0 +1,14 @@
+<div class="features-page" *ngIf="data$ | async as data">
+    <div class="container hero text-center">
+        <h1>{{ data.hero.title }}</h1>
+        <p class="subtitle">{{ data.hero.subtitle }}</p>
+    </div>
+
+    <div class="container grid">
+        <div class="feature-card" *ngFor="let item of data.featureList">
+            <div class="icon">{{ item.icon }}</div>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+        </div>
+    </div>
+</div>

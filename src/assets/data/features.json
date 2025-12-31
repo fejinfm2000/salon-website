@@ -1,0 +1,40 @@
+{
+    "title": "Powerful Features for Modern Salons",
+    "metaDescription": "Explore the comprehensive feature set of SalonPro.",
+    "hero": {
+        "title": "Everything You Need, All in One Place",
+        "subtitle": "From independent stylists to multi-location franchises, our tools scale with you."
+    },
+    "featureList": [
+        {
+            "icon": "✨",
+            "title": "Online Booking Site",
+            "description": "A beautiful, customizable booking page for your clients available 24/7."
+        },
+        {
+            "icon": "📦",
+            "title": "Inventory Management",
+            "description": "Auto-reordering alerts and retail product tracking to prevent stockouts."
+        },
+        {
+            "icon": "👥",
+            "title": "Staff Management",
+            "description": "Shift scheduling, commission tracking, and performance payroll."
+        },
+        {
+            "icon": "💬",
+            "title": "Marketing Suite",
+            "description": "Blast email campaigns and loyalty programs to keep clients coming back."
+        },
+        {
+            "icon": "🔄",
+            "title": "Recurring Appointments",
+            "description": "Easily set up repeat visits for your loyal regulars."
+        },
+        {
+            "icon": "🔒",
+            "title": "Bank-Level Security",
+            "description": "Your client data is encrypted and backed up daily."
+        }
+    ]
+}

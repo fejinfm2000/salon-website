@@ -1,0 +1,25 @@
+<div class="how-it-works-page" *ngIf="data$ | async as data">
+    <div class="container hero text-center">
+        <h1>{{ data.title }}</h1>
+        <p class="subtitle">{{ data.subtitle }}</p>
+    </div>
+
+    <div class="container steps">
+        <div class="timeline-container">
+            <!-- Connecting Line (Desktop) -->
+            <div class="timeline-line"></div>
+
+            <div class="step-item fade-in-up" *ngFor="let step of data.steps; let i = index"
+                [style.animation-delay]="i * 0.1 + 's'">
+                <div class="step-marker">
+                    <div class="icon-circle">{{ step.icon }}</div>
+                    <div class="step-blob"></div>
+                </div>
+                <div class="step-details">
+                    <h3>{{ step.title }}</h3>
+                    <p>{{ step.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

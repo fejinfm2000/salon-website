@@ -1,0 +1,66 @@
+<div class="login-wrapper">
+    <a [routerLink]="['/']" fragment="home" class="back-link">
+        <span class="back-icon">←</span>
+        <span>Back to Site</span>
+    </a>
+
+    <div class="login-container fade-in-up">
+        <!-- Brand Header - More Compact -->
+        <div class="login-brand compact">
+            <div class="logo-symbol">S</div>
+            <h1>Salon<span>Pro</span></h1>
+        </div>
+
+        <div class="login-card">
+            <div class="card-header">
+                <h2>Welcome Back</h2>
+                <p>Please enter your credentials to continue</p>
+            </div>
+
+            <form (ngSubmit)="onSubmit()" class="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="input-field">
+                        <span class="field-icon">👤</span>
+                        <input type="text" id="username" [(ngModel)]="username" name="username" required
+                            placeholder="admin@salonpro.com">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-field">
+                        <span class="field-icon">🔒</span>
+                        <input type="password" id="password" [(ngModel)]="password" name="password" required
+                            placeholder="••••••••">
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox"> <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <div class="error-box" *ngIf="error">
+                    <span class="error-icon">⚠</span>
+                    {{ error }}
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <span>Authorize Login</span>
+                    <div class="btn-glow"></div>
+                </button>
+            </form>
+        </div>
+
+        <div class="login-footer">
+            <p>&copy; 2025 SalonPro. Secure Administrative Access only.</p>
+        </div>
+    </div>
+
+    <!-- Decorative background elements -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+</div>

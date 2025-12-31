@@ -1,0 +1,191 @@
+/* Global Styles & Theming */
+:root {
+  --font-family: 'Inter', sans-serif;
+  --transition-speed: 0.3s;
+
+  /* Light Theme Default */
+  --primary-color: #6200ea;
+  --secondary-color: #03dac6;
+  --background-color: #ffffff;
+  --surface-color: #f5f5f5;
+  --text-color: #121212;
+  --text-secondary: #666666;
+  --border-color: #e0e0e0;
+  --error-color: #b00020;
+  --sidebar-width: 280px;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.2);
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme='dark'] {
+  --primary-color: #bb86fc;
+  --secondary-color: #03dac6;
+  --background-color: #121212;
+  --surface-color: #1e1e1e;
+  --text-color: #e0e0e0;
+  --text-secondary: #aaaaaa;
+  --border-color: #333333;
+  --error-color: #cf6679;
+  --glass-bg: rgba(30, 30, 30, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Reset & Base */
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+html,
+body {
+  &.admin-mode {
+    padding-top: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    width: 100% !important;
+    background-color: var(--background-color);
+
+    app-root {
+      height: 100vh !important;
+      max-height: 100vh !important;
+      overflow: hidden !important;
+      width: 100%;
+    }
+
+    .main-content {
+      height: 100vh !important;
+      max-height: 100vh !important;
+      overflow: hidden !important;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      /* CRITICAL for flex children to allow inner scrolling */
+    }
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+  line-height: 1.6;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px;
+  /* Compensation for fixed header */
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  /* Pushes footer down */
+
+  &.no-padding {
+    overflow: hidden;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-sm);
+}
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: opacity var(--transition-speed);
+  display: inline-block;
+
+  &.primary {
+    background-color: var(--primary-color);
+    color: white;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  &.secondary {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+
+    &:hover {
+      background-color: rgba(98, 0, 234, 0.05);
+    }
+  }
+
+  &.small {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Layout Utilities for SPA */
+.section-wrapper {
+  scroll-margin-top: 80px;
+  /* Offset for sticky header */
+}
+
+.bg-alt {
+  background-color: var(--surface-color);
+  /* Ensure alt background sections span full width */
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
