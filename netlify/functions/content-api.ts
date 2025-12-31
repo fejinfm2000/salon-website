@@ -50,6 +50,12 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 
     try {
         console.log(`[Request] ${event.httpMethod} for filename: ${filename}`);
+
+        // Debug: Log info about the repo we are targeting
+        console.log(`[Config] Target: ${GITHUB_OWNER}/${GITHUB_REPO} on branch ${GITHUB_BRANCH}`);
+        const tokenPreview = GITHUB_TOKEN ? `${GITHUB_TOKEN.substring(0, 4)}...${GITHUB_TOKEN.substring(GITHUB_TOKEN.length - 4)}` : 'MISSING';
+        console.log(`[Config] Token: ${tokenPreview}`);
+
         switch (event.httpMethod) {
             case 'GET':
                 return await getContent(filename, headers);
@@ -157,8 +163,8 @@ async function updateContent(filename: string, body: string | null, headers: any
 
     if (!updateResponse.ok) {
         const errorData = await updateResponse.json();
-        console.error(`[Update] Update failed:`, errorData);
-        throw new Error(`Failed to update file: ${errorData.message || updateResponse.statusText}`);
+        console.error(`[Update] Update failed: ${updateResponse.status} ${updateResponse.statusText}`, errorData);
+        throw new Error(`GitHub API Error (${updateResponse.status}): ${errorData.message || updateResponse.statusText}`);
     }
 
     console.log(`[Update] Successfully updated ${filename}.json`);
@@ -214,7 +220,8 @@ async function createContent(body: string | null, headers: any) {
 
     if (!createResponse.ok) {
         const errorData = await createResponse.json();
-        throw new Error(`Failed to create file: ${errorData.message || createResponse.statusText}`);
+        console.error(`[Create] Create failed: ${createResponse.status} ${createResponse.statusText}`, errorData);
+        throw new Error(`GitHub API Error (${createResponse.status}): ${errorData.message || createResponse.statusText}`);
     }
 
     return {
