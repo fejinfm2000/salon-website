@@ -26,11 +26,22 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
         return { statusCode: 200, headers, body: '' };
     }
 
-    if (!GITHUB_TOKEN) {
+    // Validate environment variables
+    const missingVars = [];
+    if (!GITHUB_TOKEN) missingVars.push('GITHUB_TOKEN');
+    if (!GITHUB_OWNER || GITHUB_OWNER === 'your-username') missingVars.push('GITHUB_OWNER');
+    if (!GITHUB_REPO || GITHUB_REPO === 'salon-website') missingVars.push('GITHUB_REPO');
+
+    if (missingVars.length > 0) {
+        console.error(`[Error] Missing or default environment variables: ${missingVars.join(', ')}`);
         return {
             statusCode: 500,
             headers,
-            body: JSON.stringify({ error: 'GitHub token not configured' }),
+            body: JSON.stringify({
+                error: 'Server configuration error',
+                details: `Missing environment variables: ${missingVars.join(', ')}`,
+                hint: 'Check your Netlify environment variables settings.'
+            }),
         };
     }
 
@@ -38,6 +49,7 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
     const filename = path.substring(1); // Remove leading slash
 
     try {
+        console.log(`[Request] ${event.httpMethod} for filename: ${filename}`);
         switch (event.httpMethod) {
             case 'GET':
                 return await getContent(filename, headers);
@@ -55,11 +67,15 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
                 };
         }
     } catch (error: any) {
-        console.error('Error:', error);
+        console.error('[Fatal Error]:', error);
         return {
             statusCode: 500,
             headers,
-            body: JSON.stringify({ error: error.message || 'Internal server error' }),
+            body: JSON.stringify({
+                error: error.message || 'Internal server error',
+                stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
+                type: error.constructor.name
+            }),
         };
     }
 };
