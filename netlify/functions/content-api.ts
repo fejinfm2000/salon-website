@@ -97,8 +97,13 @@ async function updateContent(filename: string, body: string | null, headers: any
     const { content, message } = JSON.parse(body);
     const filePath = `${CONTENT_PATH}/${filename}.json`;
 
+    console.log(`[Config] Owner: ${GITHUB_OWNER}, Repo: ${GITHUB_REPO}, Branch: ${GITHUB_BRANCH}`);
+    console.log(`[Update] Target file: ${filePath}`);
+
     // First, get the current file to obtain its SHA
     const getUrl = `${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${filePath}?ref=${GITHUB_BRANCH}`;
+    console.log(`[Update] Fetching SHA from: ${getUrl}`);
+
     const getResponse = await fetch(getUrl, {
         headers: {
             Authorization: `token ${GITHUB_TOKEN}`,
@@ -107,13 +112,18 @@ async function updateContent(filename: string, body: string | null, headers: any
     });
 
     if (!getResponse.ok) {
-        throw new Error(`Failed to fetch file SHA: ${getResponse.statusText}`);
+        const errorText = await getResponse.text();
+        console.error(`[Update] Failed to fetch SHA: ${getResponse.status} ${getResponse.statusText}`, errorText);
+        throw new Error(`Failed to fetch file SHA: ${getResponse.statusText} (${getResponse.status}). Check if repo owner/name/branch/path are correct in Netlify env.`);
     }
 
     const fileData: GitHubFileResponse = await getResponse.json();
+    console.log(`[Update] Found file SHA: ${fileData.sha}`);
 
     // Update the file
     const updateUrl = `${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${filePath}`;
+    console.log(`[Update] Sending update to: ${updateUrl}`);
+
     const updateResponse = await fetch(updateUrl, {
         method: 'PUT',
         headers: {
@@ -131,8 +141,11 @@ async function updateContent(filename: string, body: string | null, headers: any
 
     if (!updateResponse.ok) {
         const errorData = await updateResponse.json();
+        console.error(`[Update] Update failed:`, errorData);
         throw new Error(`Failed to update file: ${errorData.message || updateResponse.statusText}`);
     }
+
+    console.log(`[Update] Successfully updated ${filename}.json`);
 
     return {
         statusCode: 200,
