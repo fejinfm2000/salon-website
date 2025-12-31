@@ -12,8 +12,7 @@ export class ContentService {
     private http = inject(HttpClient);
 
     // Use API in production (Netlify), local files in development
-    // private readonly useAPI = environment.useAPI;
-    private readonly useAPI = "";
+    private readonly useAPI = environment.useAPI;
     private readonly apiBase = '/.netlify/functions/content-api';
 
     getContent<T>(fileName: string, forceRefresh: boolean = false): Observable<T> {
