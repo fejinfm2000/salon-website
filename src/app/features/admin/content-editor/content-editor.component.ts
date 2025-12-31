@@ -59,12 +59,16 @@ export class ContentEditorComponent {
             const parsed = JSON.parse(this.jsonContent);
             this.isSaving = true;
 
-            // Simulate API call
-            setTimeout(() => {
-                console.log('Saving content for', this.selectedFileId, parsed);
-                this.isSaving = false;
-                alert('Success! Content updated (simulated).');
-            }, 1000);
+            this.contentService.updateContent(this.selectedFileId, parsed).subscribe({
+                next: () => {
+                    this.isSaving = false;
+                    alert('✅ Content published successfully to GitHub!');
+                },
+                error: (err) => {
+                    this.isSaving = false;
+                    alert(`❌ Failed to publish: ${err.error?.error || err.message}`);
+                }
+            });
 
         } catch (e) {
             alert('Invalid JSON! Please check your syntax.');
@@ -96,6 +100,65 @@ export class ContentEditorComponent {
 
     toggleSidebar() {
         this.isSidebarVisible.update(v => !v);
+    }
+
+    deleteFile() {
+        if (!this.selectedFileId) return;
+
+        const confirmed = confirm(`Are you sure you want to delete "${this.getSelectedFileLabel()}"? This action cannot be undone.`);
+        if (!confirmed) return;
+
+        this.contentService.deleteContent(this.selectedFileId).subscribe({
+            next: () => {
+                alert('✅ Page deleted successfully from GitHub!');
+                // Remove from files list
+                this.files = this.files.filter(f => f.id !== this.selectedFileId);
+                this.selectedFileId = '';
+                this.jsonContent = '';
+            },
+            error: (err) => {
+                alert(`❌ Failed to delete: ${err.error?.error || err.message}`);
+            }
+        });
+    }
+
+    createNewFile() {
+        const filename = prompt('Enter the new page name (without .json extension):');
+        if (!filename) return;
+
+        // Validate filename
+        if (!/^[a-z0-9-]+$/.test(filename)) {
+            alert('❌ Invalid filename. Use only lowercase letters, numbers, and hyphens.');
+            return;
+        }
+
+        // Check if already exists
+        if (this.files.some(f => f.id === filename)) {
+            alert('❌ A page with this name already exists.');
+            return;
+        }
+
+        const defaultContent = {
+            title: filename.charAt(0).toUpperCase() + filename.slice(1),
+            metaDescription: `${filename} page description`
+        };
+
+        this.contentService.createContent(filename, defaultContent).subscribe({
+            next: () => {
+                alert('✅ Page created successfully in GitHub!');
+                // Add to files list
+                this.files.push({
+                    id: filename,
+                    label: defaultContent.title,
+                    icon: '📄'
+                });
+                // Select the new file
+                this.selectFile(filename);
+            },
+            error: (err) => {
+                alert(`❌ Failed to create: ${err.error?.error || err.message}`);
+            }
+        });
     }
 
     syncScroll(textarea: HTMLTextAreaElement, lineNumbers: HTMLDivElement) {

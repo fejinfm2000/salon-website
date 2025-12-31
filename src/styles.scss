@@ -156,6 +156,22 @@ button {
     }
   }
 
+  &.danger {
+    background-color: transparent;
+    border: 2px solid var(--error-color);
+    color: var(--error-color);
+
+    &:hover {
+      background-color: var(--error-color);
+      color: white;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
   &.small {
     padding: 0.4rem 0.8rem;
     font-size: 0.9rem;

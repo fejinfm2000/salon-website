@@ -18,6 +18,10 @@
                     <span class="nav-icon">🌐</span>
                     <span class="nav-label">View Live Site</span>
                 </button>
+                <button (click)="createNewFile()" class="nav-item create-new">
+                    <span class="nav-icon">➕</span>
+                    <span class="nav-label">Create New Page</span>
+                </button>
             </div>
         </nav>
 
@@ -74,6 +78,9 @@
                         </button>
                         <button class="btn secondary small" (click)="selectFile(selectedFileId)">
                             Revert
+                        </button>
+                        <button class="btn danger small" (click)="deleteFile()" [disabled]="isSaving || isLoading">
+                            🗑️ Delete
                         </button>
                         <button class="btn primary small save-btn" (click)="save()" [disabled]="isSaving || isLoading">
                             {{ isSaving ? 'Saving...' : 'Publish Changes' }}

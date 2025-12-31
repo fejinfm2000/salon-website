@@ -1,20 +1,25 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, shareReplay, tap } from 'rxjs/operators';
+import { catchError, shareReplay, tap, map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ContentService {
     private cache = new Map<string, Observable<any>>();
+    private http = inject(HttpClient);
 
-    constructor(private http: HttpClient) { }
+    // Use API in production, local files in development
+    private readonly useAPI = window.location.hostname !== 'localhost';
+    private readonly apiBase = '/.netlify/functions/content-api';
 
     getContent<T>(fileName: string): Observable<T> {
         if (!this.cache.has(fileName)) {
-            // Relative path to avoid absolute path issues in some envs
-            const url = `assets/data/${fileName}.json`;
+            const url = this.useAPI
+                ? `${this.apiBase}/${fileName}`
+                : `assets/data/${fileName}.json`;
+
             console.log(`[ContentService] Requesting: ${url}`);
 
             const obs = this.http.get<T>(url).pipe(
@@ -31,5 +36,51 @@ export class ContentService {
             this.cache.set(fileName, obs);
         }
         return this.cache.get(fileName)!;
+    }
+
+    updateContent(fileName: string, content: any, message?: string): Observable<any> {
+        const url = `${this.apiBase}/${fileName}`;
+
+        return this.http.put(url, { content, message }).pipe(
+            tap(() => {
+                // Clear cache for this file
+                this.cache.delete(fileName);
+                console.log(`[ContentService] Updated ${fileName}`);
+            }),
+            catchError(err => {
+                console.error(`[ContentService] Failed to update ${fileName}:`, err);
+                throw err;
+            })
+        );
+    }
+
+    createContent(fileName: string, content: any, message?: string): Observable<any> {
+        const url = this.apiBase;
+
+        return this.http.post(url, { filename: fileName, content, message }).pipe(
+            tap(() => {
+                console.log(`[ContentService] Created ${fileName}`);
+            }),
+            catchError(err => {
+                console.error(`[ContentService] Failed to create ${fileName}:`, err);
+                throw err;
+            })
+        );
+    }
+
+    deleteContent(fileName: string): Observable<any> {
+        const url = `${this.apiBase}/${fileName}`;
+
+        return this.http.delete(url).pipe(
+            tap(() => {
+                // Clear cache for this file
+                this.cache.delete(fileName);
+                console.log(`[ContentService] Deleted ${fileName}`);
+            }),
+            catchError(err => {
+                console.error(`[ContentService] Failed to delete ${fileName}:`, err);
+                throw err;
+            })
+        );
     }
 }
