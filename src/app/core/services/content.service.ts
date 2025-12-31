@@ -12,10 +12,16 @@ export class ContentService {
     private http = inject(HttpClient);
 
     // Use API in production (Netlify), local files in development
-    private readonly useAPI = environment.useAPI;
+    // private readonly useAPI = environment.useAPI;
+    private readonly useAPI = "";
     private readonly apiBase = '/.netlify/functions/content-api';
 
-    getContent<T>(fileName: string): Observable<T> {
+    getContent<T>(fileName: string, forceRefresh: boolean = false): Observable<T> {
+        // Clear cache if force refresh
+        if (forceRefresh) {
+            this.cache.delete(fileName);
+        }
+
         if (!this.cache.has(fileName)) {
             const url = this.useAPI
                 ? `${this.apiBase}/${fileName}`
@@ -24,15 +30,13 @@ export class ContentService {
             console.log(`[ContentService] Requesting: ${url}`);
 
             const obs = this.http.get<T>(url).pipe(
-                shareReplay(1),
-                tap(
-                    data => console.log(`[ContentService] Loaded ${fileName}:`, data),
-                    err => console.error(`[ContentService] Error loading ${fileName}:`, err)
-                ),
+                tap(data => console.log(`[ContentService] Loaded ${fileName}:`, data)),
                 catchError(err => {
                     console.error(`[ContentService] Failed to load content for ${fileName}`, err);
+                    this.cache.delete(fileName); // Remove from cache on error
                     return of({} as T);
-                })
+                }),
+                shareReplay({ bufferSize: 1, refCount: true })
             );
             this.cache.set(fileName, obs);
         }

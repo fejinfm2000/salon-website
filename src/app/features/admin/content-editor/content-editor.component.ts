@@ -26,23 +26,23 @@ export class ContentEditorComponent {
     jsonContent = '';
     isSaving = false;
     isLoading = false;
+    lineNumbers: number[] = [];
     isSidebarVisible = signal(false);
 
     private contentService = inject(ContentService);
     private authService = inject(AuthService);
     private router = inject(Router);
 
-    get lineNumbers() {
-        return this.jsonContent.split('\n').map((_, i) => i + 1);
-    }
 
-    selectFile(id: string) {
+
+    selectFile(id: string, forceRefresh: boolean = false) {
         this.selectedFileId = id;
         this.isLoading = true;
         this.isSidebarVisible.set(false); // Close sidebar on selection (mobile)
-        this.contentService.getContent<any>(id).subscribe({
+        this.contentService.getContent<any>(id, forceRefresh).subscribe({
             next: (data) => {
                 this.jsonContent = JSON.stringify(data, null, 2);
+                this.updateLineNumbers();
                 this.isLoading = false;
             },
             error: () => {
@@ -50,6 +50,11 @@ export class ContentEditorComponent {
                 this.isLoading = false;
             }
         });
+    }
+
+    updateLineNumbers() {
+        const lineCount = this.jsonContent.split('\n').length;
+        this.lineNumbers = Array.from({ length: lineCount }, (_, i) => i + 1);
     }
 
     save() {

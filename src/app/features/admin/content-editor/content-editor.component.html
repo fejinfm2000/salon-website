@@ -76,7 +76,7 @@
                         <button class="btn secondary small copy-btn" (click)="copyToClipboard()">
                             <span>📋 Copy</span>
                         </button>
-                        <button class="btn secondary small" (click)="selectFile(selectedFileId)">
+                        <button class="btn secondary small" (click)="selectFile(selectedFileId, true)">
                             Revert
                         </button>
                         <button class="btn danger small" (click)="deleteFile()" [disabled]="isSaving || isLoading">
