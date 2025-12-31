@@ -1,47 +1,47 @@
 {
-    "title": "SalonPro - The #1 Salon Management Software",
-    "metaDescription": "Streamline your appointments, manage staff, and grow your salon business with SalonPro.",
-    "hero": {
-        "headline": "Elevate Your Salon Experience",
-        "subheadline": "Stop juggling paper calendars. Automate bookings, reduce no-shows, and delight your clients with the world's most intuitive salon software.",
-        "ctaText": "Start Your 14-Day Free Trial",
-        "heroImage": "https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-    },
-    "featuresObj": [
+  "title": "SalonPro - The #1 Salon Management Software",
+  "metaDescription": "Streamlin your appointments, manage staff, and grow your salon business with SalonPro.",
+  "hero": {
+    "headline": "Elevate Your Salon Experience",
+    "subheadline": "Stop juggling paper calendars. Automate bookings, reduce no-shows, and delight your clients with the world's most intuitive salon software.",
+    "ctaText": "Start Your 14-Day Free Trial",
+    "heroImage": "https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+  },
+  "featuresObj": [
+    {
+      "title": "Designed for Growth",
+      "items": [
         {
-            "title": "Designed for Growth",
-            "items": [
-                {
-                    "icon": "📅",
-                    "title": "Smart Booking",
-                    "description": "Drag-and-drop calendar that syncs with Google & Outlook."
-                },
-                {
-                    "icon": "🤖",
-                    "title": "Auto Reminders",
-                    "description": "Reduce no-shows by 40% with automated SMS & Email alerts."
-                },
-                {
-                    "icon": "💇",
-                    "title": "Client Profiles",
-                    "description": "Track formulas, preferences, and purchase history in one place."
-                },
-                {
-                    "icon": "📈",
-                    "title": "Business Reporting",
-                    "description": "Real-time analytics on revenue, staff performance, and retention."
-                },
-                {
-                    "icon": "💳",
-                    "title": "Integrated Payments",
-                    "description": "No hidden fees. Fast checkouts. Secure processing."
-                },
-                {
-                    "icon": "📱",
-                    "title": "Mobile App",
-                    "description": "Manage your business from anywhere, available on iOS and Android."
-                }
-            ]
+          "icon": "📅",
+          "title": "Smart Booking",
+          "description": "Drag-and-drop calendar that syncs with Google & Outlook."
+        },
+        {
+          "icon": "🤖",
+          "title": "Auto Reminders",
+          "description": "Reduce no-shows by 40% with automated SMS & Email alerts."
+        },
+        {
+          "icon": "💇",
+          "title": "Client Profiles",
+          "description": "Track formulas, preferences, and purchase history in one place."
+        },
+        {
+          "icon": "📈",
+          "title": "Business Reporting",
+          "description": "Real-time analytics on revenue, staff performance, and retention."
+        },
+        {
+          "icon": "💳",
+          "title": "Integrated Payments",
+          "description": "No hidden fees. Fast checkouts. Secure processing."
+        },
+        {
+          "icon": "📱",
+          "title": "Mobile App",
+          "description": "Manage your business from anywhere, available on iOS and Android."
         }
-    ]
+      ]
+    }
+  ]
 }
