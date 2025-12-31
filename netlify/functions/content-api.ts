@@ -2,8 +2,8 @@ import { Handler, HandlerEvent, HandlerContext } from '@netlify/functions';
 
 const GITHUB_API = 'https://api.github.com';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const GITHUB_OWNER = process.env.GITHUB_OWNER || 'your-username';
-const GITHUB_REPO = process.env.GITHUB_REPO || 'salon-website';
+const GITHUB_OWNER = process.env.GITHUB_OWNER;
+const GITHUB_REPO = process.env.GITHUB_REPO;
 const GITHUB_BRANCH = process.env.GITHUB_BRANCH || 'main';
 const CONTENT_PATH = 'src/assets/data';
 
@@ -29,8 +29,8 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
     // Validate environment variables
     const missingVars = [];
     if (!GITHUB_TOKEN) missingVars.push('GITHUB_TOKEN');
-    if (!GITHUB_OWNER || GITHUB_OWNER === 'your-username') missingVars.push('GITHUB_OWNER');
-    if (!GITHUB_REPO || GITHUB_REPO === 'salon-website') missingVars.push('GITHUB_REPO');
+    if (!GITHUB_OWNER) missingVars.push('GITHUB_OWNER');
+    if (!GITHUB_REPO) missingVars.push('GITHUB_REPO');
 
     if (missingVars.length > 0) {
         console.error(`[Error] Missing or default environment variables: ${missingVars.join(', ')}`);
