@@ -10,8 +10,9 @@ export class ContentService {
     private cache = new Map<string, Observable<any>>();
     private http = inject(HttpClient);
 
-    // Use API in production, local files in development
-    private readonly useAPI = window.location.hostname !== 'localhost';
+    // Use API only in production (deployed on Netlify)
+    // In development, always use local files
+    private readonly useAPI = false; // Set to true only when deployed
     private readonly apiBase = '/.netlify/functions/content-api';
 
     getContent<T>(fileName: string): Observable<T> {
