@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap, map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -10,9 +11,8 @@ export class ContentService {
     private cache = new Map<string, Observable<any>>();
     private http = inject(HttpClient);
 
-    // Use API only in production (deployed on Netlify)
-    // In development, always use local files
-    private readonly useAPI = false; // Set to true only when deployed
+    // Use API in production (Netlify), local files in development
+    private readonly useAPI = environment.useAPI;
     private readonly apiBase = '/.netlify/functions/content-api';
 
     getContent<T>(fileName: string): Observable<T> {
