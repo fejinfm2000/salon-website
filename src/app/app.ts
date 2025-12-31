@@ -1,6 +1,6 @@
-import { Component, inject, effect, Renderer2 } from '@angular/core';
+import { Component, inject, effect, Renderer2, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { HeaderComponent } from './core/layout/header/header.component';
 import { FooterComponent } from './core/layout/footer/footer.component';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -17,6 +17,7 @@ export class App {
   private router = inject(Router);
   private renderer = inject(Renderer2);
   private document = inject(DOCUMENT);
+  private platformId = inject(PLATFORM_ID);
 
   // Detect if we are on any admin pages (login/editor/etc) to hide header/footer
   isAdminPage = toSignal(
@@ -30,11 +31,13 @@ export class App {
 
   constructor() {
     effect(() => {
-      const isLogin = this.isAdminPage();
-      if (isLogin) {
-        this.renderer.addClass(this.document.body, 'admin-mode');
-      } else {
-        this.renderer.removeClass(this.document.body, 'admin-mode');
+      if (isPlatformBrowser(this.platformId)) {
+        const isLogin = this.isAdminPage();
+        if (isLogin) {
+          this.renderer.addClass(this.document.body, 'admin-mode');
+        } else {
+          this.renderer.removeClass(this.document.body, 'admin-mode');
+        }
       }
     });
   }
