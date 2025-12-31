@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, ViewChild, ElementRef, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ContentService } from '../../../core/services/content.service';
@@ -26,6 +26,7 @@ export class ContentEditorComponent {
     jsonContent = '';
     isSaving = false;
     isLoading = false;
+    isSidebarVisible = signal(false);
 
     private contentService = inject(ContentService);
     private authService = inject(AuthService);
@@ -38,7 +39,8 @@ export class ContentEditorComponent {
     selectFile(id: string) {
         this.selectedFileId = id;
         this.isLoading = true;
-        this.contentService.getContent(id).subscribe({
+        this.isSidebarVisible.set(false); // Close sidebar on selection (mobile)
+        this.contentService.getContent<any>(id).subscribe({
             next: (data) => {
                 this.jsonContent = JSON.stringify(data, null, 2);
                 this.isLoading = false;
@@ -90,6 +92,10 @@ export class ContentEditorComponent {
 
     viewSite() {
         this.router.navigate(['/']);
+    }
+
+    toggleSidebar() {
+        this.isSidebarVisible.update(v => !v);
     }
 
     syncScroll(textarea: HTMLTextAreaElement, lineNumbers: HTMLDivElement) {
